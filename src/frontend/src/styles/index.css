@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom styles can be added below this line */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f9fafb; /* Light gray background */
+    color: #111827; /* Dark gray text */
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 600; /* Semi-bold headings */
+}
+
+a {
+    color: #3b82f6; /* Blue links */
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline; /* Underline on hover */
+}
+
+button {
+    @apply bg-blue-500 text-white font-bold py-2 px-4 rounded; /* Tailwind button styles */
+}
+
+button:hover {
+    @apply bg-blue-600; /* Darker blue on hover */
+}
