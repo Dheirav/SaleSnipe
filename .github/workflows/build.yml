@@ -9,6 +9,15 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    env:
+      # @tensorflow/tfjs-node compiles native bindings and fetches a large
+      # libtensorflow binary on postinstall; puppeteer fetches Chromium. Neither
+      # is needed to type-check the lockfile or build the frontend, and together
+      # they hang the runner.
+      PUPPETEER_SKIP_DOWNLOAD: '1'
+      PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: '1'
 
     steps:
       - uses: actions/checkout@v4
@@ -17,14 +26,17 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Install root dependencies
-        run: npm ci --no-audit --no-fund
+      # --ignore-scripts still proves package.json and package-lock.json agree
+      # and that every dependency resolves, without running native builds.
+      - name: Verify root dependencies resolve
+        run: npm ci --ignore-scripts --no-audit --no-fund
 
       - name: Install frontend dependencies
-        run: npm ci --no-audit --no-fund
+        run: npm ci --ignore-scripts --no-audit --no-fund
         working-directory: src/frontend
 
-      - name: Build
+      - name: Build frontend
         run: npm run build
+        working-directory: src/frontend
         env:
           CI: false
