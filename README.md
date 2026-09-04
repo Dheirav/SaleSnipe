@@ -6,7 +6,9 @@ SaleSnipe is a price tracking application that helps you monitor product prices 
 
 - **Multi-site Web Scraping**: Search products across Amazon, eBay, Flipkart, and more
 - **Price Tracking**: Monitor price changes and receive alerts
-- **AI-Powered Insights**: Get price predictions and sentiment analysis
+- **Price prediction and sentiment**: a TensorFlow.js model over the stored price
+  history, and a sentiment score from a hand-written keyword lexicon -- a word
+  count, not a trained sentiment model
 - **Notifications**: Receive price drop alerts via email or desktop notifications
 - **Watchlist Management**: Save and organize products you're interested in
 
